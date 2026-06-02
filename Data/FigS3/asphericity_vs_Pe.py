@@ -16,7 +16,13 @@ plt.close('all')
 
 #x = np.array([1, 5, 10, 15, 24, 35, 45, 55, 65, 75, 85, 95]) * (49**2)*10
 
-scale = (100**2)*10
+scale1 = (50**2)*10
+scale2 = (100**2)*10
+scale3 = (150**2)*10
+
+L1 =50
+L2 =100
+L3 = 150
 
 x0_1, y0_1, error_1 = np.loadtxt('asphericity_M1_gamma10_t2_omega0.5_L50.txt', unpack=True)
 x0_2, y0_2, error_2 = np.loadtxt('asphericity_M1_gamma10_t2_omega0.5_L100.txt', unpack=True)
@@ -24,26 +30,26 @@ x0_3, y0_3, error_3 = np.loadtxt('asphericity_M1_gamma10_t2_omega0.5_L150.txt', 
 
 fig, ax = plt.subplots(figsize=(9,7))
 
-ax.errorbar(x0_3* scale, y0_3, yerr=error_3/np.sqrt(20), fmt='D', color='red', markersize=8,markerfacecolor='none', capsize=4, linewidth=2, label=r"\boldmath$L=150$")
-ax.errorbar(x0_2* scale, y0_2, yerr=error_2/np.sqrt(20), fmt='s', color='green', markersize=10,markerfacecolor='none', capsize=4, linewidth=2, label=r"\boldmath$L=100$")
-ax.errorbar(x0_1* scale, y0_1, yerr=error_1/np.sqrt(20), fmt='o', color='blue', markersize=10,markerfacecolor='none', capsize=4, linewidth=2, label=r"\boldmath$L=50$")
+ax.errorbar(x0_3* scale3/L3**2, y0_3, yerr=error_3/np.sqrt(20), fmt='D', color='red', markersize=8,markerfacecolor='none', capsize=4, linewidth=2, label=r"\boldmath$L=150$")
+ax.errorbar(x0_2* scale2/L2**2, y0_2, yerr=error_2/np.sqrt(20), fmt='s', color='green', markersize=10,markerfacecolor='none', capsize=4, linewidth=2, label=r"\boldmath$L=100$")
+ax.errorbar(x0_1* scale1/L1**2, y0_1, yerr=error_1/np.sqrt(20), fmt='o', color='blue', markersize=10,markerfacecolor='none', capsize=4, linewidth=2, label=r"\boldmath$L=50$")
 
 
 
 
-ax.scatter(x0_1 * scale, y0_1, marker='o', color='blue', s=64, facecolors='none')
-ax.scatter(x0_2 * scale, y0_2, marker='s', color='green', s=64, facecolors='none')
-ax.scatter(x0_3 * scale, y0_3, marker='D', color='red', s=64, facecolors='none')
+ax.scatter(x0_1 * scale1/L1**2, y0_1, marker='o', color='blue', s=64, facecolors='none')
+ax.scatter(x0_2 * scale2/L2**2, y0_2, marker='s', color='green', s=64, facecolors='none')
+ax.scatter(x0_3 * scale3/L3**2, y0_3, marker='D', color='red', s=64, facecolors='none')
 
 
-ax.plot(x0_1* scale, y0_1, color='blue', linestyle='--',linewidth=2)
-ax.plot(x0_2* scale, y0_2, color='green', linestyle=':',linewidth=3)
-ax.plot(x0_3* scale, y0_3, color='red', linestyle='-.',linewidth=2)
+ax.plot(x0_1* scale1/L1**2, y0_1, color='blue', linestyle='--',linewidth=2)
+ax.plot(x0_2* scale2/L2**2, y0_2, color='green', linestyle=':',linewidth=3)
+ax.plot(x0_3* scale3/L3**2, y0_3, color='red', linestyle='-.',linewidth=2)
 
-ax.set_xlabel(r'\boldmath$Pe$', fontsize=21, fontweight='bold')
+ax.set_xlabel(r'\boldmath$Pe/L^2$', fontsize=21, fontweight='bold')
 ax.set_ylabel(r'\boldmath$\langle A\rangle$', fontsize=21, fontweight='bold')
 
-ax.set_xticks([0,0.2*1e7,0.4*1e7,0.6*1e7,0.8*1e7,1.0*1e7,1.2*1e7,1.4*1e7])
+ax.set_xticks([0,0.2*1e3,0.4*1e3,0.6*1e3,0.8*1e3,1.0*1e3,1.2*1e3,1.4*1e3])
 ax.set_yticks([0.10,0.2,0.3,0.4,0.5,0.6,0.7])
 ax.set_xticklabels([r'\boldmath$0$', r'\boldmath$0.2$',r'\boldmath$0.4$',r'\boldmath$0.6$',r'\boldmath$0.8$',r'\boldmath$1.0$',r'\boldmath$1.2$',r'\boldmath$1.4$'], fontsize=18)
 ax.set_yticklabels([r'\boldmath$0.1$', r'\boldmath$0.2$',r'\boldmath$0.3$',r'\boldmath$0.4$',r'\boldmath$0.5$',r'\boldmath$0.6$',r'\boldmath$0.7$'], fontsize=18)
@@ -55,14 +61,14 @@ ax.minorticks_on()
 
 ax.legend(fontsize=16)
 
-ax.text(1.13, -0.04, r'\boldmath$(\times 10^7)$', transform=ax.transAxes,
+ax.text(1.13, -0.04, r'\boldmath$(\times 10^3)$', transform=ax.transAxes,
         fontsize=18, fontweight='bold', ha='right')
 
 for spine in ax.spines.values():
-    spine.set_linewidth(2.5)
+    spine.set_linewidth(1.8)
 #ax.set_title(r"\boldmath{$(b)$}", fontsize=20)
 #plt.xlim(0,240000)
 plt.ylim(0,0.8)
 plt.tight_layout()
-plt.savefig('asphericity_vs_pe_M1_omega_0.5__t2_varyL.pdf')
+plt.savefig('asphericity_vs_pe_M1_omega_0.5__t2_varyL_new.pdf')
 
